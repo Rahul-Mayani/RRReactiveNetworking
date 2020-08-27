@@ -24,15 +24,16 @@ Managing Nested Asynchronous Callbacks in Objective-C using ReactiveCocoa by AFN
 
 ## Usage example
 
-A RACSignal should wrap an operation with an asynchronous callback block.
+A **RACSignal** should wrap an operation with an asynchronous callback block.
 
 The last signal to run should call subscribeNext for receiving output values. If no output values are available, subscribeNext can be replaced by subscribeCompleted or subscribeError.
 
-Any intermediate step is defined by flattenMap. The parameter in flattenMap corresponds to the data from the next signal. It also takes a return value, which is the subsequent signal to run. The two signals are written top-down and are executed top-down.
+Any intermediate step is defined by **flattenMap**. The parameter in flattenMap corresponds to the data from the next signal. It also takes a return value, which is the subsequent signal to run. The two signals are written top-down and are executed top-down.
 
-We don’t want to strongly retain self: in ARC, we introduce __weak. Also, the extra square brackets at start and end are ugly in Objective-C’s implementation of functional reactive programming.
+We don’t want to strongly retain self: in ARC, we introduce **__weak**. Also, the extra square brackets at start and end are ugly in Objective-C’s implementation of functional reactive programming.
 
-```
+```Objective-C
+
 @weakify(self);
 
 NSDictionary *param = @{@"key": @"test"};
